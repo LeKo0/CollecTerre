@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {%load static%}
+    <meta charset="utf-8">
+    <title>{% block title %}CollecTerre{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "home/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "home/slick/slick.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "home/slick/slick-theme.css" %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static "home/slick/slick.min.js" %}"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCH8wds3dUiUaBhEUPopKnZpfy08VPUwvU&sensor=false"></script>
+    <script type="text/javascript" src="{% static "home/gmaps/gmaps.js" %}"></script>
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="50" style = "background-color : white;">
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color : #73bfcd; border-width : 0;">
+      <a class="navbar-brand" style="color:rgba(0,0,0,.9) !important;" href="/home">CollecTerre</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/home/projets">Projets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/home/organisations">Organisations</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <li class="nav-item dropdown">
+             
+	     {% if user.is_authenticated %}
+	     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Options
+             </a>
+	     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+             <a class="dropdown-item" href="/projets/gestion">Créer un projet</a>
+             <a class="dropdown-item" href="/organisations/logout">Se deconnecter</a> 
+	     {% else %}
+
+	     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Connexion
+             </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+             <a class="dropdown-item" href="/organisations/login">Se connecter</a>
+             <a class="dropdown-item" href="/organisations/inscription">S'inscrire</a>
+             {% endif %}
+           </div>
+         </li>
+        </span>
+      </div>
+    </nav>
+
+    <div class="main_container">
+
+	    {% block cards %}{% endblock %}
+
+    </div>
+
+
+    <div class="">
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <!--Footer Bottom-->
+		<div class="license" style="font-size: 0.5em;">
+              	  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            	</div>
+	    </div>
+          </div>
+          <div class="row">
+            <div class="col-6" style = "text-align : left;">
+              <a href="#">Plan du site</a>
+            </div>
+            <div class="col-6" style = "text-align : right;">
+              Site web réalisé grâce
+              <p></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6" style = "text-align : left;">
+              Autres Liens
+            </div>
+            <div class="col-6" style = "text-align : right;">
+              aux données fournies par <a href="https://www.donneesquebec.ca/">Données Québec</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <script>
+  function myFunction() {
+      var x = document.getElementById("demo");
+      if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+      } else {
+          x.className = x.className.replace(" w3-show", "");
+      }
+  }
+  </script>
+
+
+  </body>
+</html>

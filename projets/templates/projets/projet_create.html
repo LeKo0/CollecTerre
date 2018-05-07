@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+      {% block cards %}
+      <div class="container" style="margin-bottom: 30px;margin-top: 30px;">
+        <div class="row justify-content-md-center" style="text-align: center;">
+          <div class="col-md-4">
+            <h1>Créez votre projet ici</h1>
+            <p style="font-weight: 200;">Création de projet</p>
+            <hr>
+          </div>
+        </div>
+        <div class="row justify-content-md-center" style="text-align: center;margin-top: 60px;">
+          <div class="col-md-4">
+            <h2 style="margin-bottom:15px;">Création de projet</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-primary" style="margin-top:15px;">Soumettre</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endblock %}

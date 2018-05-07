@@ -1,0 +1,38 @@
+{% extends 'base.html' %}	
+
+<!-- CARDS pour afficher les projets -->
+{% block cards %}
+<br/>
+<div class="row justify-content-around projects">
+   {% for proj in list %}
+    <div class="card border-light mb-3" style="max-width: 40rem;">
+    <div class="card-header">
+      <p class="title">{{ proj }}</p>
+      <p class="org">{{ proj.organisation }}</p>
+    </div>
+    <div class="card-body">
+      <div class="infos">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="media">
+              <div class="media-left d-flex mr-3">
+		      <a href="/projets/{{ proj.id }}">
+			{% if proj.image %}<img src="{{ proj.image.url }}" alt="">{% endif %}
+                </a>
+              </div>
+              <div class="media-body">
+                <div class="testimonial">
+		  <p>{{ proj.description }}</p>
+		  <a href="/projets/{{ proj.id }}" style="position: relative;float: right;" class="btn btn-primary link">Je veux aider !</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+{% endblock %}

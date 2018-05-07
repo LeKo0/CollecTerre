@@ -1,0 +1,38 @@
+from django import forms
+from .models import Organisation 
+from django.contrib.auth.forms import UserCreationForm
+
+
+class RegistrationForm(UserCreationForm):
+   image = forms.ImageField()
+   nom = forms.CharField(forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Nom  de l'organisme"}), max_length=32, help_text='Last name')
+   description = form.TextField()
+   phone = forms.CharField(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=32, help_text='Last name')
+   website = forms.URLField(label='Your website', required=False)
+   username = forms.CharField(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
+   first_name = forms.CharField(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}), max_length=32, help_text='First name')
+   last_name=forms.CharField(forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), max_length=32, help_text='Last name')
+   email=forms.EmailField(forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}), max_length=64, help_text='Enter a valid email address')
+   password1=forms.CharField(forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+   password2=forms.CharField(forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Again'})) 
+
+   class Meta(UserCreationForm.Meta):
+        model = Organisation
+        fields = ('image', 'nom', 'description', 'phone', 'username','website', 'first_name','last_name','email','password1','password2')
+
+   def save(self, commit=True):
+        organisation = super(RegistrationForm, self).save(commit=False)
+        organisation.first_name = cleaned_data['first_name']
+        organisation.last_name = cleaned_data['last_name']
+        organisation.email = cleaned_data['email']
+        organisation.website = cleaned_data['wesite']
+        organisation.image = cleaned_data['image']
+        organisation.nom = cleaned_data['nom']
+        organisation.phone = cleaned_data['phone']
+        organisation.description = cleaned_data['description']
+        
+
+        if commit:
+            organisation.save()
+
+        return organisation

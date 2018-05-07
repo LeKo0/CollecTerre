@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+<!-- Page d'une organisation -->
+{% block cards %}
+<br/>
+<div class="container orgs">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>{{ org }}</h2>
+      <hr>
+    </div>
+  </div>
+  <div class="row description">
+    <div class="col-sm-8">
+      <h4>Description</h4>
+      <p class="desc">{{ org.description }}</p>
+    </div>
+    
+  </div>
+  <div class="row initiated_projects">
+    <div class="col-md-12">
+      <h4>Projet(s) initié(s)</h4>
+      <hr>
+      <!-- Projects -->
+	<div class="row justify-content-around projects">
+	
+	{% for proj in projets %}
+	<!-- CARDS pour afficher les projets -->
+	  <div class="card border-light mb-3" style="max-width: 40rem;">
+	    <div class="card-header">
+		    <p class="title">{{ proj }}</p>
+		    <p class="org">{{ org }}</p>
+	    </div>
+	    <div class="card-body">
+	      <div class="infos">
+	        <div class="row">
+	          <div class="col-sm-12">
+	            <div class="media">
+	              <div class="media-left d-flex mr-3">
+			      <a href="/projets/{{ proj.id }}">
+				      <img src="{{ proj.image.url }}" alt="">
+	                </a>
+	              </div>
+	              <div class="media-body">
+	                <div class="testimonial">
+				<p>{{ proj.description }}</p>
+			  <a href="/projets/{{proj.id}}" style="position: relative;float: right;" class="btn btn-primary link">Je veux aider !</a>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+ 	     </div>
+	    </div>
+	  </div>
+	{% endfor %}
+	</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

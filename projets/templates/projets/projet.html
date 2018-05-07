@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+<!-- Page d'un projet -->
+{% block cards %}
+<br/>
+<div class="container proj">
+  <div class="row">
+    <div class="col-sm-12">
+	    <h2>{{ projet }}</h2>
+	    <h5>{{ org }}</h5>
+      <hr>
+    </div>
+  </div>
+  <div class="row description">
+    <div class="col-sm-8">
+	    <h4>Description</h4>
+	    <p class="desc">{{ projet.description }}</p>
+    </div>
+    <div class="col-sm-4">
+	    {% if projet.image %}<img class="img-fluid" style="max-width: 100%;" src="{{ projet.image.url }}" alt="image projet" />{% endif %}
+    </div>
+  </div>
+  <div class="row initiated_projects">
+    <div class="col-md-12">
+      <h4>Carte</h4>
+      <hr>
+      <!-- Insert the Google Map -->
+	<div class="container proj_map_container">
+              <div class="row">
+                <div id="map"></div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <a href="soumission" class="btn btn-primary">Soumettre mes résultats</a>
+                  </div>
+                </div>
+                <script type="text/javascript">
+                  showMap(0, 0);
+                  if (navigator.geolocation) {
+                      if(navigator.geolocation.getCurrentPosition(showPosition)) {
+                        //It worked, nothing more to do
+                      } else {
+                        map.setCenter(45.5017, -73.5673);
+                      }
+                  }
+                  function showPosition(position) {
+                    map.setCenter(position.coords.latitude, position.coords.longitude);
+                  }
+                  var map, path, paths;
+                  function showMap(lat, lng){
+                    map = new GMaps({
+                      el: '#map',
+                      lat: lat,
+                      lng: lng,
+                      zoom: 0,
+                    });
+                  }
+                  map.drawPolygon({
+                    paths: {{ poly }}, 
+		    useGeoJSON: true,
+                    strokeColor: '#131540',
+                    strokeOpacity: 0.6,
+                    strokeWeight: 6
+                  });
+                </script>
+              </div>
+            </div>
+    </div>
+  </div>
+  <div class="row new_entry">
+    <div class="col-md-12">
+      <h4>Soumissions</h4>
+      <hr>
+	{% if soumissions %}
+		{% for s in soumissions %}
+			
+<div class="row justify-content-center row_sub">
+
+    <div class="col-sm-6">
+
+      <h4>{{ s.get_type_fichier_display }}</h4>
+
+      <p>{{ s.nom }} | {{ s.email }}</p>
+
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-sm-6">
+
+      <div class="download">
+
+	<p><a download href="/media/{{ s.fichier }}">{{ s }}</a></p>
+
+      </div>
+
+      <hr>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+		{% endfor %}
+	{% else %}
+		<p>Aucune soumission</p>
+	{% endif %}	
+    </div>
+  </div>
+</div>
+{% endblock %}

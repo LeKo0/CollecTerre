@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!-- CARDS pour afficher des organisations -->
+{% block cards %}
+<br/>
+<div class="row justify-content-around projects">
+  {% for org in list %}
+  {% if org.nom != "orgroot" and org.nom != "user" %}
+  <div class="card border-light mb-3" style="max-width: 40rem;">
+    <div class="card-header">
+	    <p class="title">{{ org }}</p>
+    </div>
+    <div class="card-body">
+      <div class="infos">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="media">
+              <div class="media-left d-flex mr-3">
+		      <a href="/organisations/profil/{{org.id}}">
+		{% if org.image %}<img src="{{ org.image.url }}" alt="image organisme">{% endif %}
+                </a>
+              </div>
+              <div class="media-body">
+                <div class="testimonial">
+			<p>{{ org.description }}</p>
+			<a href="/organisations/profil/{{org.id}}" style="position: relative;float: right;" class="btn btn-primary link">En savoir plus</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}
