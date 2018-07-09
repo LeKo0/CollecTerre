@@ -1,4 +1,4 @@
 # Hackathon HackQC 2018
-https://hackqc.devpost.com/
+https://devpost.com/software/collecterre
 # Site 
 http://hqc.qc.to
